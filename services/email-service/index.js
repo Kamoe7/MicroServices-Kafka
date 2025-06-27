@@ -2,7 +2,7 @@ import {Kafka} from 'kafkajs';
 
 const kafka = new Kafka({
     clientId:'email-service',
-    brokers:'localhost:9094'
+    brokers:['localhost:9094','localhost:9095','localhost:9096']
 });
 
 const producer = kafka.producer();
@@ -23,7 +23,7 @@ const run = async() =>{
             eachMessage: async ({topic, partition, message})=>{
                 const value = message.value.toString();
                 const {userId, orderID}= JSON.parse(value);
-                
+                  
                 // TODO send email to user
                 const dummyEmailId = '98656556656';
                 console.log(`Email sent to user ${userId} for order ${orderID}. Email ID: ${dummyEmailId}`);

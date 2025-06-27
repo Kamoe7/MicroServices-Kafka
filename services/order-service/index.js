@@ -2,7 +2,7 @@ import {Kafka} from 'kafkajs';
 
 const kafka = new Kafka({
     clientId:'order-service',
-    brokers:['localhost:9094']
+    brokers:['localhost:9094','localhost:9095','localhost:9096']
 })
 
 const producer = kafka.producer();
@@ -27,6 +27,7 @@ const run = async () => {
 
                 //TODO create order in database
                 const dummyOrderId="123456789";
+                console.log(`Order created for user ${userId} with order ID ${dummyOrderId}`);
 
                 await producer.send({
                     topic:'order-successful',
